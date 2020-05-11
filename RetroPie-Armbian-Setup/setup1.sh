@@ -136,8 +136,8 @@ install_basis () {
         echo "#################################"
         echo "##  Installing kernel headers  ##"
         echo "#################################"
-        echo ""
-        wget https://github.com/RetroPie-Expanded/linux-headers/raw/master/armbian/linux-headers-rockchip_5.50.deb
+        echo ""  
+        wget https://github.com/slaminger/linux-headers/raw/master/armbian/linux-headers-rockchip_5.50.deb
         sudo dpkg -i linux-headers-rockchip_5.50.deb
         rm *.deb
         
@@ -165,7 +165,7 @@ install_basis () {
         echo "################################################################"
         echo ""
         sudo apt install -y xutils-dev
-        git clone --branch rockchip-2.4.74 https://github.com/rockchip-linux/libdrm-rockchip.git
+        git clone --branch rockchip-2.4.74 https://github.com/slaminger/libdrm-rockchip
         cd libdrm-rockchip
         ./autogen.sh --disable-intel --enable-rockchip-experimental-api --disable-freedreno --disable-tegra --disable-vmwgfx --disable-vc4 --disable-radeon --disable-amdgpu --disable-nouveau
         make -j4 && sudo make install
@@ -177,13 +177,13 @@ install_basis () {
         echo "##  Installing libmali  ##"
         echo "##########################"
         echo ""
-        git clone --branch rockchip-header https://github.com/RetroPie-Expanded/libmali.git
+        git clone --branch rockchip-header https://github.com/slaminger/libmali
         cd libmali
         cmake CMakeLists.txt
         make -j4 -C ~/libmali && sudo make install
         cd ~
         rm -rf libmali
-        git clone --branch rockchip https://github.com/RetroPie-Expanded/libmali.git
+        git clone --branch rockchip https://github.com/slaminger/libmali
         cd libmali
         cmake CMakeLists.txt
         make -j4 -C ~/libmali && sudo make install
@@ -215,18 +215,13 @@ install_basis () {
         cd ~
         rm -rf wayland
         
-        echo ""
-        echo "########################"
-        echo "##  Cloning RetroPie  ##"
-        echo "########################"
-        echo ""
-        git clone --depth=1 https://github.com/RetroPie-Expanded/RetroPie-Setup.git
+      
 
         echo "############################"
         echo "##  Installing gpu boost  ##"
         echo "############################"
         echo ""
-		wget https://raw.githubusercontent.com/RetroPie-Expanded/Armbian-Setup-for-RetroPie/gpu-freqboost-tinker
+		wget https://github.com/slaminger/RetroPie-On-The-Tinkerboard/blob/master/RetroPie-Armbian-Setup/gpu-freqboost-tinker
 		
 		sudo cp -v "gpu-freqboost-tinker" /etc/init.d
 
@@ -409,7 +404,7 @@ install_optional () {
         echo "##  Installation completed  ##"
         echo "##############################"
         echo ""
-        echo "Run 'sudo ~/RetroPie-Setup/retropie_setup.sh' and then reboot your system. Then you can install the packages from RetroPie-Setup."
+        echo "Run 'sudo ~ROTT/installer_src/install.sh'. Then you can install the packages from RetroPie-Setup."
 fi
 }
 
